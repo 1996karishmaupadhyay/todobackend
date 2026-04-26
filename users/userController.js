@@ -11,17 +11,22 @@ export const signup=async(req,res)=>{
 
         res.json({message:"User created successfully",user:createUser})
     } catch (error) {
-        res.status(500).json({message:"Error creating user",error:error})
+        res.status(500).json({message:"Error creating user",error:error.message})
     }
 }
 
 export const login=async(req,res)=>{
    try {
-    const user =await User.loginUser(req.body);
-console.log('🍳 :', user);
-    
-    res.json({message:"User logged in successfully",user})
+    const user =await loginUser(req.body);
+    console.log("coming in backeend controller",user);
+    if(!user){
+      return res.status(404).json({message:"User not found"});
+    }else{
+      return res.json({message:"User logged in successfully",user})
+    }
+
    } catch (error) {
     res.status(500).json({message:"Error logging in user",error:error})
+      console.log("🔥 REAL LOGIN ERROR:", error);
    }
 }

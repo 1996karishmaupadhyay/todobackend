@@ -1,12 +1,16 @@
 
 import User from "./userModel.js";
+import bcrypt from "bcrypt";
 export const registerUser = async (userData) => {
   const { username, email, password } = userData;
 console.log('😜 userData:', userData);
   const existingUser = await User.findOne({ email });
 console.log('🎗 existingUser:', existingUser);
   if (!existingUser) {
-    const createNewUser = await User.create({ username, email, password });
+    console.log("🔍 No existing user found, proceeding to create a new user");
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log('🔐 hashedPassword:', hashedPassword)
+    const createNewUser = await User.create({ username, email, password:hashedPassword });
 console.log('🌞 createNewUser:', createNewUser);
     return createNewUser;
   } else {
@@ -17,14 +21,18 @@ console.log('🌞 createNewUser:', createNewUser);
 export const loginUser = async (loginData) => {
   const { email, password } = loginData;
   const user = await User.findOne({ email });
-  if (user) {
-    if (user.password === password) {
-      return user;
-      
-    } else {
-      throw new Error("Invalid password");
-    }
-  } else {
+try {
+  if(!user){
     throw new Error("User not found");
+  }else{
+    const passwordMatch=await bcrypt.compare(password,user.password);
+    if(!passwordMatch){
+      throw new Error("Invalid password");
+    }else{
+      return user;
+    }
   }
+} catch (error) {
+  throw new Error(error.message);
+}
 };

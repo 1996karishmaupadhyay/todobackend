@@ -1,9 +1,12 @@
 import express from "express"
 import dotenv from "dotenv"
+import cors from "cors"
 import connectDb from "./config/config.js";
 import userRouter from "./users/userRoute.js";
 dotenv.config()
+
 const app=express();
+app.use(cors()); 
 connectDb();
 const PORT=process.env.PORT
 
