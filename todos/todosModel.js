@@ -1,5 +1,5 @@
 import e from "cors";
-import { Schema } from "mongoose";
+import { Schema ,mongoose } from "mongoose";
 
 const todos =new Schema({
     title:{

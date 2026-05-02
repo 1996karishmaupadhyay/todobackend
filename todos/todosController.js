@@ -1,4 +1,4 @@
-import { createTodo } from "./todosService";
+import { createTodo } from "./todosService.js";
 
 const addToDo=async(req,res)=>{
     try {
@@ -16,4 +16,4 @@ const addToDo=async(req,res)=>{
     }
 }
 
-export {addToDo}
+export default addToDo;

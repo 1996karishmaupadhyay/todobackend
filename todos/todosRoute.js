@@ -1,7 +1,5 @@
 import express from 'express';
-import { addToDo,
-    // deleteToDo, getToDos, updateToDo
-     } from './todosController.js';
+import  addToDo from './todosController.js';
 const toDoRouter =express.Router();
 
 toDoRouter.post('/add',addToDo);
