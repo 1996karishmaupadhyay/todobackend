@@ -14,3 +14,12 @@ export const createTodo = async (todo) => {
         throw new Error(error.message)
     }
 }
+
+export const getAllToDos=async(todos)=>{
+    try {
+        const todos=await todoModel.find();     
+        return todos;
+    } catch (error) {
+        throw new Error(error.message)
+    }  
+}

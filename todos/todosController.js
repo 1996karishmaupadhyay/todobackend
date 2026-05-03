@@ -16,4 +16,21 @@ const addToDo=async(req,res)=>{
     }
 }
 
-export default addToDo;
+
+const getToDos=async(req,res)=>{
+    try {
+        const todos=await getAllToDos();
+        res.status(200).json({
+            success:true,
+            message:"ToDos retrieved successfully",
+            data:todos,
+        })
+    } catch (error) {
+        res.status(400).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+export default { addToDo, getToDos };
