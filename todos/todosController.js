@@ -33,4 +33,21 @@ const getToDos=async(req,res)=>{
     }
 }
 
-export default { addToDo, getToDos };
+
+
+const deleteToDo=async(req,res)=>{
+    try {
+        const id=req.params.id; 
+        await deleteToDoById(id);
+        res.status(200).json({
+            success:true,
+            message:"ToDo deleted successfully",
+        })
+    } catch (error) {
+        res.status(400).json({
+            success:false,  
+            message:error.message
+        })
+    }   
+} 
+export default { addToDo, getToDos, deleteToDo };
