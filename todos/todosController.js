@@ -1,6 +1,6 @@
 import { createTodo } from "./todosService.js";
 
-const addToDo=async(req,res)=>{
+export const addToDo=async(req,res)=>{
     try {
         const todo=await createTodo(req.body);
         res.status(200).json({
@@ -17,7 +17,7 @@ const addToDo=async(req,res)=>{
 }
 
 
-const getToDos=async(req,res)=>{
+export const getToDos=async(req,res)=>{
     try {
         const todos=await getAllToDos();
         res.status(200).json({
@@ -35,7 +35,7 @@ const getToDos=async(req,res)=>{
 
 
 
-const deleteToDo=async(req,res)=>{
+export const deleteToDo=async(req,res)=>{
     try {
         const id=req.params.id; 
         await deleteToDoById(id);
@@ -50,4 +50,3 @@ const deleteToDo=async(req,res)=>{
         })
     }   
 } 
-export default { addToDo, getToDos, deleteToDo };

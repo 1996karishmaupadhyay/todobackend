@@ -23,3 +23,12 @@ export const getAllToDos=async(todos)=>{
         throw new Error(error.message)
     }  
 }
+
+export const deleteToDoById=async(id)=>{
+    try {
+        const deletedTodo = await todoModel.findByIdAndDelete(id);
+        return deletedTodo;
+    } catch (error) {
+        throw new Error(error.message)
+     }  
+    }
