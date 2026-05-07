@@ -32,3 +32,12 @@ export const deleteToDoById=async(id)=>{
         throw new Error(error.message)
      }  
     }
+
+    const updateToDoById=async(id,todo)=>{
+        try {
+            const updatedTodo=await todoModel.findByIdAndUpdate(id,todo,{new:true});
+            return updatedTodo;
+        } catch (error) {
+            throw new Error(error.message)
+        }   
+}

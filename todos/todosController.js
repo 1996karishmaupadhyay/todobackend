@@ -1,4 +1,4 @@
-import { createTodo } from "./todosService.js";
+import { createTodo ,getAllToDos,deleteToDoById} from "./todosService.js";
 
 export const addToDo=async(req,res)=>{
     try {
@@ -50,3 +50,16 @@ export const deleteToDo=async(req,res)=>{
         })
     }   
 } 
+
+
+export const updateToDo=async(req,res)=>{
+    try {
+        await updateToDoById(req.params.id,req.body);
+        res.status(200).json({
+            success:true,
+            message:"ToDo updated successfully",
+        })  
+    } catch (error) {
+        throw new Error(error.message)
+    }
+}
